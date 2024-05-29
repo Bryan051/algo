@@ -1,4 +1,6 @@
+
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -9,13 +11,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
         sc.close();
-        
-        s = s.trim();
-        String[] s_arr = s.split(" ");
-        
-        if(s_arr[0].equals("")) System.out.println(0);
-        
-        else System.out.println(s_arr.length);
+
+        StringTokenizer st = new StringTokenizer(s, " ");
+
+        System.out.println(st.countTokens());
+
+
 
     }
 
