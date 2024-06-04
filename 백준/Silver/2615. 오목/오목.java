@@ -14,7 +14,6 @@ public class Main {
     //                  하,우하,우,우상
     static int[] dx = { 1, 1, 0,-1 };
     static int[] dy = { 0, 1, 1, 1 };
-    //  오목판 입력, 가장 왼쪽의 점 출력 위해 좌상단 - 아래로 탐색
 
     public static void main(String[] args) throws IOException {
 
@@ -31,6 +30,7 @@ public class Main {
 
     }
 
+    //  가장 왼쪽의 점 출력 위해 좌상단 - 아래로 탐색
     public static String find() {
         for (int j = 1; j <=19; j++) {
             for (int i = 1; i <=19 ; i++) {
@@ -51,6 +51,8 @@ public class Main {
         int nx = x + dx[dir];
         int ny = y + dy[dir];
 
+        //  보드에서 d 방향으로 한 칸 옮긴 색(1 혹은 2)이 같을 때 
+        // 옮긴 칸 기준으로 재귀. + 1 올림 ( find의 if calc() == 5 조건 위해)
         if (board[nx][ny] == color) {
             return memo[nx][ny][dir] = calc(nx, ny, dir, color) + 1;
         }
