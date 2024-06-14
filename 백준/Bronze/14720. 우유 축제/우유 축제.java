@@ -17,17 +17,9 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             int x = Integer.parseInt(st.nextToken());
-            if (x == next && next == 0) {
+            if (x == next) {
                 cnt++;
-                next = 1;
-            }
-            if (x == next && next == 1) {
-                cnt++;
-                next = 2;
-            }
-            if (x == next && next == 2) {
-                cnt++;
-                next = 0;
+                next = (next+1)%3;
             }
         }
         System.out.println(cnt);
