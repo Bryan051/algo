@@ -1,27 +1,40 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        String s1 = br.readLine();
-        String s2 = br.readLine();
-        String s = "";
 
-        for (int i = 0; i < s1.length(); i++) {
-            s += s1.charAt(i);
-            s += s2.charAt(i);
+        String a = br.readLine();
+        String b = br.readLine();
+
+        Queue<Integer> arr = new LinkedList<>();
+        for (int i = 0; i < 8; i++) {
+            arr.add(Character.getNumericValue(a.charAt(i)));
+            arr.add(Character.getNumericValue(b.charAt(i)));
         }
-        while (s.length() > 2) {
-            String tmp = "";
-            for (int i = 0; i < s.length()-1; i++) {
-                int n = Character.getNumericValue(s.charAt(i)) + Character.getNumericValue(s.charAt(i+1));
-                tmp += Integer.toString(n % 10);
+
+        int cycle = 15;
+
+        while (arr.size() != 2) {
+            for (int i = 0; i < cycle; i++) {
+                int x = arr.poll();
+                int y = arr.peek();
+                int z = (x + y) % 10;
+                arr.add(z);
             }
-            s = tmp;
+            // 끝났을 때 마지막 번호는 peek 이라 queue에 남아있다.
+            arr.poll();
+            cycle--;
         }
-        System.out.println(s);
-
+        StringBuilder sb = new StringBuilder();
+        sb.append(arr.poll());
+        sb.append(arr.poll());
+        String ans = sb.toString();
+        System.out.println(ans);
     }
+
 }
