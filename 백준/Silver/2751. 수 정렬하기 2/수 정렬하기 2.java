@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 
 public class Main {
 
@@ -10,22 +9,22 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        ArrayList<Integer> list = new ArrayList<>();
+        int[] arr = new int[n];
 
         for (int i = 0; i < n ; i++) {
             int a = Integer.parseInt(br.readLine());
-            list.add(a);
+            arr[i] = a;
         }
-        br.close();
-        Collections.sort(list);
 
-        for (int i : list) {
+        Arrays.sort(arr);
+
+        for (int i : arr) {
             bw.write(i + "\n");
         }
-        
+
         bw.flush();
         bw.close();
-        
+
     }
 
 }
