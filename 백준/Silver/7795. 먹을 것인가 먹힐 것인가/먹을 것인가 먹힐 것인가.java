@@ -24,39 +24,43 @@ public class Main {
             int m = Integer.parseInt(st.nextToken());
 
             st = new StringTokenizer(br.readLine());
-            Integer[] arrA = new Integer[n];
+            int[] arrA = new int[n];
             for (int i = 0; i < n; i++) {
                 arrA[i] = Integer.parseInt(st.nextToken());
             }
             st = new StringTokenizer(br.readLine());
-            Integer[] arrB = new Integer[m];
+            int[] arrB = new int[m];
             for (int i = 0; i < m; i++) {
                 arrB[i] = Integer.parseInt(st.nextToken());
             }
-            Arrays.sort(arrA,Collections.reverseOrder());
-            Arrays.sort(arrB,Collections.reverseOrder());
+
+            // groupB는 이분탐색의 범위이므로 정렬이 필수이다.
+            // 처음알았다..
+            Arrays.sort(arrB);
 
             int ans = 0;
             for (int i = 0; i < n; i++) {
+                int low = 0;
+                int high = m - 1;
                 int cnt = 0;
-                for (int j = 0; j < m; j++) {
-                    if (arrA[i] > arrB[j]) {
-                        // 내림차순으로 정렬했기때문에
-                        // A가 B보다 더 큰 값을 발견하면 
-                        // 그 다음 숫자들은 당연히 크다.
-                        ans += (m - cnt);
-                        break;
+
+                while (low <= high) {
+                    int mid = (low + high) / 2;
+                    if (arrB[mid] < arrA[i]) {
+                        low = mid + 1;
+                        // 정렬이 되었기때문에 mid 갯수만큼 카운트.
+                        // 인덱스 0 부터 시작이라 + 1
+                        cnt = mid + 1;
                     } else {
-                        cnt++;
+                        high = mid - 1;
                     }
                 }
+                ans += cnt;
             }
             sb.append(ans).append("\n");
 
         }
         System.out.println(sb);
     }
-
-
 }
 
