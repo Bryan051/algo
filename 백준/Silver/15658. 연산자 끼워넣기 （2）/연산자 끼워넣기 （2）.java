@@ -20,6 +20,8 @@ public class Main {
     static int[] arr;
     static int[] operArr;
     static int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+    
+    static int plus, minus, mulitply, divide;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,43 +36,62 @@ public class Main {
         }
 
         st = new StringTokenizer(br.readLine());
-        operArr = new int[4];
-        for (int i = 0; i < 4; i++) {
-            operArr[i] = Integer.parseInt(st.nextToken());
-        }
+        plus = Integer.parseInt(st.nextToken());
+        minus = Integer.parseInt(st.nextToken());
+        mulitply = Integer.parseInt(st.nextToken());
+        divide = Integer.parseInt(st.nextToken());
+        
 
-        dfs(1, arr[0]);
+        calc(1, arr[0]);
 
         System.out.println(max);
         System.out.println(min);
     }
 
-    public static void dfs(int level, int sum) {
+    public static void calc(int level, int sum) {
         if (level == n) {
             max = Math.max(max, sum);
             min = Math.min(min, sum);
             return;
         }
 
-        for (int i = 0; i < 4; i++) {
-            if (operArr[i] > 0) {
-                operArr[i] -= 1;
-                switch (i) {
-                    case 0:
-                        dfs(level + 1, sum + arr[level]);
-                        break;
-                    case 1:
-                        dfs(level + 1, sum - arr[level]);
-                        break;
-                    case 2:
-                        dfs(level + 1, sum * arr[level]);
-                        break;
-                    case 3:
-                        dfs(level + 1, sum / arr[level]);
-                        break;
-                }
-                operArr[i] += 1;
-            }
+        if (plus > 0) {
+            plus -= 1;
+            calc(level + 1, sum + arr[level]);
+            plus += 1;
+        }
+        if (minus > 0) {
+            minus -= 1;
+            calc(level + 1, sum - arr[level]);
+            minus += 1;
+        }
+        if (divide > 0) {
+            divide -= 1;
+            calc(level + 1, sum / arr[level]);
+            divide += 1;
+        }
+        if (mulitply > 0) {
+            mulitply -= 1;
+            calc(level + 1, sum * arr[level]);
+            mulitply += 1;
         }
     }
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
