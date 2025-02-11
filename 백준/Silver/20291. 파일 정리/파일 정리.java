@@ -18,30 +18,23 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
 
-        ArrayList<String> key = new ArrayList<>();
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new TreeMap<>();
+
         for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine(),".");
+            st = new StringTokenizer(br.readLine(), ".");
+
             st.nextToken();
             String extension = st.nextToken();
-            if (map.containsKey(extension)) {
-                int x = map.get(extension) + 1;
-                map.put(extension, x);
-            } else {
-                key.add(extension);
-                map.put(extension, 1);
-            }
-        }
-        Collections.sort(key);
-        for (int i = 0; i < map.size(); i++) {
-            System.out.println(key.get(i) + " " + map.get(key.get(i)));
+
+            map.put(extension, map.getOrDefault(extension, 0) + 1);
         }
 
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            sb.append(entry.getKey()).append(" ").append(entry.getValue()).append("\n");
+        }
 
+        System.out.print(sb);
     }
-
-
-
 }
 
 
